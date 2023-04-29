@@ -35,18 +35,41 @@ template IsZero() {
 ```
 
 ## 第3题 相等 IsEqual
+```
+template IsEqual() {
+    signal input in[2];
+    signal output out;
 
+    component isz = IsZero();
+
+    in[1] - in[0] ==> isz.in // 相减一定等于0;
+
+    isz.out ==> out;
+}
+```
 
 ## 第4题 选择器 Selector
-
+没明白
 
 ## 第5题 判负 IsNegative
-
+没明白
 
 ## 第6题 少于 LessThan
+```
+template LessThan(n) {
+    assert(n <= 252);
+    signal input in[2];
+    signal output out;
 
+    component n2b = Num2Bits(n+1);
+
+    n2b.in <== in[0]+ (1<<n) - in[1] // 如果最高位不是1了，说明相加了一个负数，大小就可以判断出来了;
+
+    out <== 1-n2b.out[n];
+}
+```
 
 ## 第7题 整数除法 IntegerDivide
-
+没明白
 
 ## 第8题 排序 Sort 【可选】
